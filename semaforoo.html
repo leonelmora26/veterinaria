@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./semaforo.css" />
+    <title>Document</title>
+  </head>
+  <body>
+<div class="container">
+    <br>
+    <div class="color" id="verde"></div>
+    <div class="color" id="naranja"></div>
+    <div class="color" id="rojo"></div>
+</div>
+<input type="button" id="boton" value="Aceptar" onclick="accion()">
+
+
+  </body>
+  <script>
+    var verdeElement = document.getElementById("verde");
+      var naranjaElement = document.getElementById("naranja");
+      var rojoElement = document.getElementById("rojo"); 
+      document.getElementById("verde").style.backgroundColor = "green";
+    function accion() {
+        
+
+      if (verdeElement.style.backgroundColor === "green") {
+        naranjaElement.style.backgroundColor = "orange";
+        verdeElement.style.backgroundColor = "grey";
+        rojoElement.style.backgroundColor = "grey";
+      } else if(naranjaElement.style.backgroundColor === "orange"){
+        naranjaElement.style.backgroundColor = "grey";
+        verdeElement.style.backgroundColor = "grey";
+        rojoElement.style.backgroundColor = "red";
+       } else if(rojoElement.style.backgroundColor === "red"){
+        naranjaElement.style.backgroundColor = "grey";
+        verdeElement.style.backgroundColor = "green";
+        rojoElement.style.backgroundColor = "grey";
+    }
+}
+  </script>
+  <style>
+body{
+margin: 0%;
+ height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+#verde,#naranja,#rojo{
+    height: 30%;
+    width: 70%;
+    margin: 1%;
+    border-radius:90%;
+    background-color: gray;
+}
+.container{
+    width: 16%;
+    height: 70%;
+    background-color: black;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+#boton{
+    margin-left: 5%;
+    font-size: 20px;
+}
+
+  </style>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="galeria.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="todo">
+    <div id="imageuno">
+    </div>
+    <div class="flex">
+        <section id="section"></section>
+    </div>
+</div>
+    <script>
+        let circulo = document.getElementById("imageuno");
+        let fotos = document.getElementById("section");
+        let imagenes = ["./imagenes/1.jpg", "./imagenes/2.jpg", "./imagenes/3.jpg", "./imagenes/4.jpg", "./imagenes/5.jpg", "./imagenes/6.jpg", "./imagenes/7.jpg", "./imagenes/8.jpg", "./imagenes/9.jpg","./imagenes/10.jpg","./imagenes/11.jpg","./imagenes/12.jpg"];
+
+        for (let i = 0; i < 12; i++) {
+            let div = document.createElement("div");
+            div.id = "etiqueta" + i;
+
+            let img = document.createElement("img");
+            img.src = imagenes[i];
+            img.alt = "imagen" + i;
+
+            div.appendChild(img);
+            fotos.appendChild(div);
+
+            div.addEventListener("click", function () {
+                circulo.style.backgroundImage = "url(" + imagenes[i] + ")";
+            });
+        }
+        
+    </script>
+</body>
+<style>
+    body{
+        background-color: rgb(213, 128, 128);   
+        margin: 0%;
+        display: flex;
+        justify-content: center;
+}
+
+.contenedor{
+       
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        justify-items: center;
+}
+
+.flex{
+display: flex;
+justify-content: center;
+}
+
+#section{
+        height: 500px;
+        width: 1000px;
+        background-repeat: no-repeat;
+        background-position: center ;
+        background-size: cover;
+        display: grid;
+        grid-template-columns: repeat(4,25%);
+}
+#imageuno {
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 260px;
+    height: 260px;
+  border: solid 4px rgb(0, 0, 0);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+img{
+        width: 220px;
+        height: 240px;
+}
+    
+#todo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+#etiqueta0,#etiqueta1, #etiqueta2, #etiqueta3, #etiqueta4, #etiqueta5, #etiqueta6, #etiqueta7, #etiqueta8, #etiqueta9, #etiqueta10, #etiqueta11, #etiqueta12{
+    height: 240px;
+    border: solid 4px black;
+    margin: 5%;
+    }
+</style>
+</html>
