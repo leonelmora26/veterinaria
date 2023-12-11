@@ -1,515 +1,526 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-      <title>Veterinaria</title>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+  <title>Veterinaria</title>
+</head>
 
-    <body>
-      <div id="zonaArriba">
-        <h1 style="margin: 20px 0px; text-align: center" id="titulo">
-          VETERINARIA LA MORALEJA
-        </h1>
-      </div>
+<body>
+  <div id="zonaArriba">
+    <h1 style="margin: 20px 0px; text-align: center" id="titulo">
+      VETERINARIA LA MORALEJA
+    </h1>
+  </div>
 
-      <button onclick="crear()" style="margin: 20px 0px" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Nueva cita
-      </button>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Nuevo registro
-              </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="cuerpo">
-              <label for="">Nombre de la mascota</label><input type="text" id="mascota" /> <br />
-              <p id="p1" style="display: none">Por favor digite el nombre de la mascota</p>
-              <label for="">Nombre del propietario</label><input type="text" id="dueño" /> <br />
-              <p id="p2" style="display: none">Por favor digite el nombre del propietario</p>
-              <label for="">Numero de telefono</label><input type="number" id="telefono" /> <br />
-              <p id="p3" style="display: none">Por favor digite un numero de telefono</p>
-              <p id="p4" style="display: none">El numero de telefono debe ser mayor a 10 caracteres</p>
-              <label for="">Fecha</label><input type="date" name="" id="fecha" min="2023-07-22" onchange="validarDia(); validarHora();" /> <br />
-              <p id="p5" style="display: none">Su fecha debe ser posterior al día actual</p>
-              <p id="p9" style="display: none">Los sábados y domingos no están disponibles</p>
-              <label for="">Hora</label><input type="time" name="" id="hora" /> <br />
-              <p id="p6" style="display: none">Por favor escoja una hora</p>
-              <p id="p10" style="display: none">Horario disponible 9:00am a 5:00pm</p>
-
-        
-              <label for="">Tipo</label>
-              <select class="form-select" aria-label="Default select example" id="tipoAnimalSelect">
-                <option value="0" disabled selected>Seleccione un tipo de animal</option>
-                <option value="mamifero">Mamifero</option>
-                <option value="reptil">Reptil</option>
-                <option value="anfibio">Anfibio</option>
-                <option value="ave">Ave</option>
-                <option value="pez">Pez</option>
-              </select>
-              <p id="p7" style="display: none">Seleccionar el tipo correspondiente</p>
-
-              <br />
-              <label for="">Sintomas</label><input type="text" name="" id="sintomas" />
-              <p id="p8" style="display: none">Por favor llenar el recuadro vacio </p><br>
-
-              <label for="">estado</label>
-              <select class="form-select" aria-label="Default select example" id="estado">
-                <option value="0" disabled selected>Seleccionar el tipo de estado</option>
-                <option value="creado">Creado</option>
-                <option value="Terminado">Terminado</option>
-                <option value="Cancelado">Cancelado</option>          
-              </select>
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button onclick="guardar()" type="button" id="agregar" class="btn btn-primary">Guardar cambios</button>
-            </div>
-          </div>
+  <button style="margin: 20px 0px" data-bs-toggle="modal" data-bs-target="#exampleModal" class="añadir">
+    Nueva cita
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Nuevo registro
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-      <div id="container">
-        <div id="compartido">
-          <h1 id="admi">Administración de citas</h1>
-          <label for="">Estados</label>
-          <select class="form-select" aria-label="Default select example" id="Estados" onchange="filtrarPorEstado()">
-             <option value="todas">Todos</option>
-            <option value="Creado">Creado</option>
-            <option value="Terminado">Terminado</option>
-            <option value="Cancelado">Cancelado</option>
+        <div class="modal-body" id="cuerpo">
+          <label for="">Nombre de la mascota</label><input type="text" id="mascota" /> <br />
+          <p id="p1" style="display: none">Por favor digite el nombre de la mascota</p>
+          <label for="">Nombre del propietario</label><input type="text" id="dueño" /> <br />
+          <p id="p2" style="display: none">Por favor digite el nombre del propietario</p>
+          <label for="">Numero de telefono</label><input type="number" id="telefono" /> <br />
+          <p id="p3" style="display: none">Por favor digite un numero de telefono</p>
+          <p id="p4" style="display: none">El numero de telefono debe ser mayor a 10 caracteres</p>
+          <label for="">Fecha</label><input type="date" name="" id="fecha" min="2023-07-22" onchange="validarDia(); validarHora();" /> <br />
+          <p id="p5" style="display: none">Su fecha debe ser posterior al día actual</p>
+          <p id="p9" style="display: none">Los sábados y domingos no están disponibles</p>
+          <label for="">Hora</label><input type="time" name="" id="hora" /> <br />
+          <p id="p6" style="display: none">Por favor escoja una hora</p>
+          <p id="p10" style="display: none">Horario disponible 9:00am a 5:00pm</p>
+
+    
+          <label for="">Tipo</label>
+          <select class="form-select" aria-label="Default select example" id="tipoAnimalSelect">
+            <option value="0" disabled selected>Seleccione un tipo de animal</option>
+            <option value="mamifero">Mamifero</option>
+            <option value="reptil">Reptil</option>
+            <option value="anfibio">Anfibio</option>
+            <option value="ave">Ave</option>
+            <option value="pez">Pez</option>
           </select>
+          <p id="p7" style="display: none">Seleccionar el tipo correspondiente</p>
+
+          <br />
+          <label for="">Sintomas</label><input type="text" name="" id="sintomas" />
+          <p id="p8" style="display: none">Por favor llenar el recuadro vacio </p><br>
+
+          <label for="">estado</label>
+          <select class="form-select" aria-label="Default select example" id="estado">
+            <option value="0" disabled selected>Seleccionar el tipo de estado</option>
+            <option value="creado">Creado</option>
+            <option value="Terminado">Terminado</option>
+            <option value="Cancelado">Cancelado</option>          
+          </select>
+
         </div>
-        <div id="contenedorTarjetas"></div>
-        <div id="container2"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button onclick="guardar()" type="button" id="agregar" class="btn btn-primary">Guardar cambios</button>
+        </div>
       </div>
-      
-      <script>
-     
-         var mascotas = {
-          mamifero: "./imagenes/mamifero.jpg",
-          reptil: "./imagenes/reptil.jpg",
-          anfibio: "./imagenes/anfibio.jpg",
-          ave: "./imagenes/ave.jpg",
-          pez: "./imagenes/pez.jpg",
-        };
-
-        var cartaModificar = null;
-        function limpiarCampos() {
-    document.getElementById("mascota").value = "";
-    document.getElementById("dueño").value = "";
-    document.getElementById("telefono").value = "";
-    document.getElementById("fecha").value = "";
-    document.getElementById("hora").value = "";
-    document.getElementById("tipoAnimalSelect").value = "0";
-    document.getElementById("sintomas").value = "";
-    document.getElementById("estado").value = "0";
-  }
+    </div>
+  </div>
+  <div id="container">
+    <div id="compartido">
+      <h1 id="admi">Administración de citas</h1>
+      <label for="">Estados</label>
+      <select class="form-select" aria-label="Default select example" id="Estados" onchange="filtrarPorEstado()">
+         <option value="todas">Todos</option>
+        <option value="Creado">Creado</option>
+        <option value="Terminado">Terminado</option>
+        <option value="Cancelado">Cancelado</option>
+      </select>
+    </div>
+    <div id="contenedorTarjetas"></div>
+    <div id="container2"></div>
+  </div>
   
-        const listaCartas = [];
-        function validarHora() {
-      const horaSeleccionada = document.getElementById("hora").value;
-      const horaMinima = "09:00";
-      const horaMaxima = "17:00";
+  <script>
+ 
+     var mascotas = {
+      mamifero: "./imagenes/mamifero.jpg",
+      reptil: "./imagenes/reptil.jpg",
+      anfibio: "./imagenes/anfibio.jpg",
+      ave: "./imagenes/ave.jpg",
+      pez: "./imagenes/pez.jpg",
+    };
 
-      if (horaSeleccionada < horaMinima || horaSeleccionada > horaMaxima) {
-        document.getElementById("p10").style.display = "block";
-        setTimeout(() => {
-          document.getElementById("p10").style.display = "none";
-        }, 3000);
-        return false;
-      }
+    var cartaModificar = null;
+    function limpiarCampos() {
+document.getElementById("mascota").value = "";
+document.getElementById("dueño").value = "";
+document.getElementById("telefono").value = "";
+document.getElementById("fecha").value = "";
+document.getElementById("hora").value = "";
+document.getElementById("tipoAnimalSelect").value = "0";
+document.getElementById("sintomas").value = "";
+document.getElementById("estado").value = "0";
+}
 
-      return true;
-    }
-
-    function validarHorarioDisponible() {
-  const fechaInput = document.getElementById("fecha");
-  const fechaSeleccionada = new Date(fechaInput.value);
-  const diaSeleccionado = fechaSeleccionada.getDay();
-
-  if (diaSeleccionado === 6 || diaSeleccionado === 0) {
-    document.getElementById("p9").style.display = "block";
-    fechaInput.value = ""; 
-    return false;
-  }
-
+    const listaCartas = [];
+    function validarHora() {
   const horaSeleccionada = document.getElementById("hora").value;
   const horaMinima = "09:00";
   const horaMaxima = "17:00";
 
   if (horaSeleccionada < horaMinima || horaSeleccionada > horaMaxima) {
     document.getElementById("p10").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("p10").style.display = "none";
+    }, 3000);
     return false;
   }
 
   return true;
 }
-         function validarDia() {
+
+function validarHorarioDisponible() {
+const fechaInput = document.getElementById("fecha");
+const fechaSeleccionada = new Date(fechaInput.value);
+const diaSeleccionado = fechaSeleccionada.getDay();
+
+
+const horaSeleccionada = document.getElementById("hora").value;
+const horaMinima = "09:00";
+const horaMaxima = "17:00";
+
+if (horaSeleccionada < horaMinima || horaSeleccionada > horaMaxima) {
+document.getElementById("p10").style.display = "block";
+return false;
+}
+
+return true;
+}
+function validarDia() {
     const fechaInput = document.getElementById("fecha");
     const fechaSeleccionada = new Date(fechaInput.value);
     const diaSeleccionado = fechaSeleccionada.getDay(); 
 
-
-    if (diaSeleccionado === 6 || diaSeleccionado === 0) {
-      document.getElementById("p9").style.display = "block";
-      fechaInput.value = ""; 
+    if (diaSeleccionado === 5 || diaSeleccionado ===6) {
+        document.getElementById("p9").style.display = "block";
+        fechaInput.value = ""; 
     } else {
-      document.getElementById("p9").style.display = "none";
+        document.getElementById("p9").style.display = "none";
     }
-  }function guardar() {
-  if (valid()) {
-    if (!validarHorarioDisponible()) {
-      document.getElementById("p10").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("p10").style.display = "none";
-      }, 3000);
-      return;
-    }
-            const mascota = document.getElementById("mascota").value;
-            const dueño = document.getElementById("dueño").value;
-            const telefono = document.getElementById("telefono").value;
-            const fecha = document.getElementById("fecha").value;
-            const hora = document.getElementById("hora").value;
-            const tipo = document.getElementById("tipoAnimalSelect").value;
-            const sintomas = document.getElementById("sintomas").value;
-            const nuevoestado = document.getElementById("estado").value;
+}
+function guardar() {
+if (valid()) {
+if (!validarHorarioDisponible()) {
+  document.getElementById("p10").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("p10").style.display = "none";
+  }, 3000);
+  return;
+}
+        const mascota = document.getElementById("mascota").value;
+        const dueño = document.getElementById("dueño").value;
+        const telefono = document.getElementById("telefono").value;
+        const fecha = document.getElementById("fecha").value;
+        const hora = document.getElementById("hora").value;
+        const tipo = document.getElementById("tipoAnimalSelect").value;
+        const sintomas = document.getElementById("sintomas").value;
+        const nuevoestado = document.getElementById("estado").value;
 
-            if (cartaModificar) {
-            
-              const imagen = cartaModificar.querySelector("img");
-        imagen.src = mascotas[tipo];
-        imagen.alt = mascota;
-
-        const nombreMascota = cartaModificar.querySelector("h5");
-        nombreMascota.textContent = mascota;
-
-        const propietario = cartaModificar.querySelector(".card-text");
-        propietario.textContent = "Propietario: " + dueño;
-
-        const numTelefono = cartaModificar.querySelector(".card-text:nth-of-type(2)");
-        numTelefono.textContent = "Teléfono: " + telefono;
-
-        const fechaHora = cartaModificar.querySelector(".card-text:nth-of-type(3)");
-        fechaHora.textContent = "Fecha y hora: " + fecha + " " + hora;
-
-        const tipoAnimal = cartaModificar.querySelector(".card-text:nth-of-type(4)");
-        tipoAnimal.textContent =
-          "Tipo de animal: " + document.querySelector("#tipoAnimalSelect option:checked").text;
-
-        const sintomasOriginal = cartaModificar.dataset.sintomas;
-              
-        const sintomasTexto = cartaModificar.querySelector(".card-text:last-of-type");
-        sintomasTexto.textContent = "Síntomas: " + sintomasOriginal;
-
-        const estadoTexto = cartaModificar.querySelector(".estado-text");
-    estadoTexto.textContent = "Tipo de estado: " + document.querySelector("#estado option:checked").text;
-
-        cartaModificar = null; 
+        if (cartaModificar) {
         
-            } else {
-              
-              const carta = document.createElement("div");
-              carta.classList.add("card");
-              carta.style.width = "18rem";
+          const imagen = cartaModificar.querySelector("img");
+    imagen.src = mascotas[tipo];
+    imagen.alt = mascota;
 
-              const imagen = document.createElement("img");
-              imagen.src = mascotas[tipo];
-              imagen.classList.add("card-img-top");
-              imagen.alt = mascota;
-              carta.appendChild(imagen);
+    const nombreMascota = cartaModificar.querySelector("h5");
+    nombreMascota.textContent = mascota;
 
-              const cardBody = document.createElement("div");
-              cardBody.classList.add("card-body");
+    const propietario = cartaModificar.querySelector(".card-text");
+    propietario.textContent = "Propietario: " + dueño;
 
-              const nombreMascota = document.createElement("h5");
-              nombreMascota.classList.add("card-title");
-              nombreMascota.textContent = mascota;
-              cardBody.appendChild(nombreMascota);
+    const numTelefono = cartaModificar.querySelector(".card-text:nth-of-type(2)");
+    numTelefono.textContent = "Teléfono: " + telefono;
 
-              const propietario = document.createElement("p");
-              propietario.classList.add("card-text");
-              propietario.textContent = "Propietario: " + dueño;
-              cardBody.appendChild(propietario);
+    const fechaHora = cartaModificar.querySelector(".card-text:nth-of-type(3)");
+    fechaHora.textContent = "Fecha y hora: " + fecha + " " + hora;
 
-              const numTelefono = document.createElement("p");
-              numTelefono.classList.add("card-text");
-              numTelefono.textContent = "Teléfono: " + telefono;
-              cardBody.appendChild(numTelefono);
+    const tipoAnimal = cartaModificar.querySelector(".card-text:nth-of-type(4)");
+    tipoAnimal.textContent =
+      "Tipo de animal: " + document.querySelector("#tipoAnimalSelect option:checked").text;
 
-              const fechaHora = document.createElement("p");
-              fechaHora.classList.add("card-text");
-              fechaHora.textContent = "Fecha y hora: " + fecha + " " + hora;
-              cardBody.appendChild(fechaHora);
-
-              const tipoAnimal = document.createElement("p");
-              tipoAnimal.classList.add("card-text");
-              tipoAnimal.textContent =
-                "Tipo de animal: " + document.querySelector("#tipoAnimalSelect option:checked").text;
-              cardBody.appendChild(tipoAnimal);
-
-              const sintomasTexto = document.createElement("p");
-              sintomasTexto.classList.add("card-text");
-              sintomasTexto.textContent = "Síntomas: " + sintomas;
-              cardBody.appendChild(sintomasTexto);
-
-              const estadoTexto = document.createElement("p");
-              estadoTexto.classList.add("card-text");
-              estadoTexto.classList.add("estado-text");
-              estadoTexto.textContent = "Tipo de estado: " + document.querySelector("#estado option:checked").text;
-              cardBody.appendChild(estadoTexto);
-              
-
-              const botonModificar = document.createElement("button");
-              botonModificar.classList.add("btn", "btn-primary", "me-2");
-              botonModificar.textContent = "Modificar";
-              botonModificar.addEventListener("click", () => {
-                modificarCarta(carta);
-              });
-              cardBody.appendChild(botonModificar);
-
-              const botonEliminar = document.createElement("button");
-              botonEliminar.classList.add("btn", "btn-danger");
-              botonEliminar.textContent = "Eliminar";
-              botonEliminar.addEventListener("click", () => {
-                eliminarCarta(carta);
-              });
-              cardBody.appendChild(botonEliminar);
-
-              carta.appendChild(cardBody);
-              document.getElementById("container2").appendChild(carta);
-            }
-
-            
-            const modal = bootstrap.Modal.getInstance(document.getElementById("exampleModal"));
-    modal.hide();
-    limpiarCampos();
-          }
-        }
-   
-        function modificarCarta(carta) {
-          cartaModificar = carta;
+    const sintomasOriginal = cartaModificar.dataset.sintomas;
           
-          const mascota = carta.querySelector("h5").textContent;
-          const propietario = carta.querySelector(".card-text").textContent.split(": ")[1];
-          const telefono = carta.querySelector(".card-text:nth-of-type(2)").textContent.split(": ")[1];
-          const fechaHora = carta.querySelector(".card-text:nth-of-type(3)").textContent.split(": ")[1];
-          const tipo = carta.querySelector(".card-text:nth-of-type(4)").textContent.split(": ")[1];
-          const sintomas = carta.querySelector(".card-text:last-of-type").textContent.split(": ")[1];
-          const estado = carta.querySelector(".estado-text").textContent.split(": ")[1];
-          document.getElementById("estado").value = estado;
+    const sintomasTexto = cartaModificar.querySelector(".card-text:last-of-type");
+sintomasTexto.textContent = "Síntomas: " + sintomasOriginal;
 
-          sintomasOriginal= sintomas;
 
+    const estadoTexto = cartaModificar.querySelector(".estado-text");
+estadoTexto.textContent = "Tipo de estado: " + document.querySelector("#estado option:checked").text;
+
+    cartaModificar = null; 
+    
+        } else {
           
-          document.getElementById("mascota").value = mascota;
-          document.getElementById("dueño").value = propietario;
-          document.getElementById("telefono").value = telefono;
-          document.getElementById("fecha").value = fechaHora.split(" ")[0];
-          document.getElementById("hora").value = fechaHora.split(" ")[1];
-          document.getElementById("tipoAnimalSelect").value = tipo.toLowerCase();
-          document.getElementById("sintomas").value = sintomas;
-          document.getElementById("estado").value = estado;
+          const carta = document.createElement("div");
+          carta.classList.add("card");
+          carta.style.width = "18rem";
 
+          const imagen = document.createElement("img");
+          imagen.src = mascotas[tipo];
+          imagen.classList.add("card-img-top");
+          imagen.alt = mascota;
+          carta.appendChild(imagen);
 
+          const cardBody = document.createElement("div");
+          cardBody.classList.add("card-body");
 
-         
-          const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-          modal.show();
+          const nombreMascota = document.createElement("h5");
+          nombreMascota.classList.add("card-title");
+          nombreMascota.textContent = mascota;
+          cardBody.appendChild(nombreMascota);
+
+          const propietario = document.createElement("p");
+          propietario.classList.add("card-text");
+          propietario.textContent = "Propietario: " + dueño;
+          cardBody.appendChild(propietario);
+
+          const numTelefono = document.createElement("p");
+          numTelefono.classList.add("card-text");
+          numTelefono.textContent = "Teléfono: " + telefono;
+          cardBody.appendChild(numTelefono);
+
+          const fechaHora = document.createElement("p");
+          fechaHora.classList.add("card-text");
+          fechaHora.textContent = "Fecha y hora: " + fecha + " " + hora;
+          cardBody.appendChild(fechaHora);
+
+          const tipoAnimal = document.createElement("p");
+          tipoAnimal.classList.add("card-text");
+          tipoAnimal.textContent =
+            "Tipo de animal: " + document.querySelector("#tipoAnimalSelect option:checked").text;
+          cardBody.appendChild(tipoAnimal);
+
+          const sintomasTexto = document.createElement("p");
+          sintomasTexto.classList.add("card-text");
+          sintomasTexto.textContent = "Síntomas: " + sintomas;
+          cardBody.appendChild(sintomasTexto);
+
+          const estadoTexto = document.createElement("p");
+          estadoTexto.classList.add("card-text");
+          estadoTexto.classList.add("estado-text");
+          estadoTexto.textContent = "Tipo de estado: " + document.querySelector("#estado option:checked").text;
+          cardBody.appendChild(estadoTexto);
+          
+
+          const botonModificar = document.createElement("button");
+          botonModificar.classList.add("btn", "btn-primary", "me-2");
+          botonModificar.textContent = "Modificar";
+          botonModificar.addEventListener("click", () => {
+            modificarCarta(carta);
+          });
+          cardBody.appendChild(botonModificar);
+
+          const botonEliminar = document.createElement("button");
+          botonEliminar.classList.add("btn", "btn-danger");
+          botonEliminar.textContent = "Eliminar";
+          botonEliminar.addEventListener("click", () => {
+            eliminarCarta(carta);
+          });
+          cardBody.appendChild(botonEliminar);
+
+          carta.appendChild(cardBody);
+          document.getElementById("container2").appendChild(carta);
         }
 
-        function eliminarCarta(carta) {
-          carta.remove();
-        }
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById("exampleModal"));
+modal.hide();
+limpiarCampos();
+      }
+    }
 
-        function valid() {
-          
-          if (document.getElementById("mascota").value.trim() === "") {
-            document.getElementById("p1").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p1").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("dueño").value.trim() === "") {
-            document.getElementById("p2").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p2").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("telefono").value.trim() === "") {
-            document.getElementById("p3").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p3").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("telefono").value.length < 10) {
-            document.getElementById("p4").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p4").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("fecha").value === "") {
-            document.getElementById("p5").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p5").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("hora").value.trim() === "") {
-            document.getElementById("p6").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p6").style.display = "none";
-            }, 3000);
-            return false;
-          }else if (document.getElementById("hora").value.trim() === "") {
-            document.getElementById("p10").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p10").style.display = "none";
-            }, 3000);
-            return false;
-          }else if (document.getElementById("tipoAnimalSelect").value === "0") {
-            document.getElementById("p7").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p7").style.display = "none";
-            }, 3000);
-            return false;
-          } else if (document.getElementById("sintomas").value === "") {
-            document.getElementById("p8").style.display = "block";
-            setTimeout(() => {
-              document.getElementById("p8").style.display = "none";
-            }, 3000);
-            return false;
-          } else {
-            return true;
-          }
-          
-        }
-        function mostrarTodasLasTarjetas() {
-  const cartas = document.querySelectorAll(".card");
-  cartas.forEach((carta) => {
-    carta.style.display = "block"; 
-  });
+    function modificarCarta(carta) {
+      cartaModificar = carta;
+      
+      const mascota = carta.querySelector("h5").textContent;
+      const propietario = carta.querySelector(".card-text").textContent.split(": ")[1];
+      const telefono = carta.querySelector(".card-text:nth-of-type(2)").textContent.split(": ")[1];
+      const fechaHora = carta.querySelector(".card-text:nth-of-type(3)").textContent.split(": ")[1];
+      const tipo = carta.querySelector(".card-text:nth-of-type(4)").textContent.split(": ")[1];
+      const sintomas = carta.querySelector(".card-text:last-of-type").textContent.split(": ")[1];
+      const estado = carta.querySelector(".estado-text").textContent.split(": ")[1];
+
+
+
+      sintomasOriginal= sintomas;
+
+      
+      document.getElementById("mascota").value = mascota;
+      document.getElementById("dueño").value = propietario;
+      document.getElementById("telefono").value = telefono;
+      document.getElementById("fecha").value = fechaHora.split(" ")[0];
+      document.getElementById("hora").value = fechaHora.split(" ")[1];
+      document.getElementById("tipoAnimalSelect").value = tipo.toLowerCase();
+      document.getElementById("sintomas").value = sintomas;
+      document.getElementById("estado").value = estado;
+
+
+
+     
+      const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+      modal.show();
+    }
+
+    function eliminarCarta(carta) {
+      carta.remove();
+    }
+
+    function valid() {
+      
+      if (document.getElementById("mascota").value.trim() === "") {
+        document.getElementById("p1").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p1").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("dueño").value.trim() === "") {
+        document.getElementById("p2").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p2").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("telefono").value.trim() === "") {
+        document.getElementById("p3").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p3").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("telefono").value.length < 10) {
+        document.getElementById("p4").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p4").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("fecha").value === "") {
+        document.getElementById("p5").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p5").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("hora").value.trim() === "") {
+        document.getElementById("p6").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p6").style.display = "none";
+        }, 3000);
+        return false;
+      }else if (document.getElementById("hora").value.trim() === "") {
+        document.getElementById("p10").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p10").style.display = "none";
+        }, 3000);
+        return false;
+      }else if (document.getElementById("tipoAnimalSelect").value === "0") {
+        document.getElementById("p7").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p7").style.display = "none";
+        }, 3000);
+        return false;
+      } else if (document.getElementById("sintomas").value === "") {
+        document.getElementById("p8").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("p8").style.display = "none";
+        }, 3000);
+        return false;
+      } else {
+        return true;
+      }
+      
+    }
+    function mostrarTodasLasTarjetas() {
+const cartas = document.querySelectorAll(".card");
+cartas.forEach((carta) => {
+carta.style.display = "block"; 
+});
 }
 
 
 function filtrarPorEstado() {
-  const estadoSeleccionado = document.getElementById("Estados").value;
-  if (estadoSeleccionado === "todas") {
-    mostrarTodasLasTarjetas(); 
-    return;
-  }
-
-  const cartas = document.querySelectorAll(".card");
-  cartas.forEach((carta) => {
-    const estadoTexto = carta.querySelector(".estado-text").textContent.split(": ")[1];
-    if (estadoTexto === estadoSeleccionado) {
-      carta.style.display = "block";
-    } else {
-      carta.style.display = "none";
-    }
-  });
+const estadoSeleccionado = document.getElementById("Estados").value;
+if (estadoSeleccionado === "todas") {
+mostrarTodasLasTarjetas(); 
+return;
 }
 
+const cartas = document.querySelectorAll(".card");
+cartas.forEach((carta) => {
+const estadoTexto = carta.querySelector(".estado-text").textContent.split(": ")[1];
+if (estadoTexto === estadoSeleccionado) {
+  carta.style.display = "block";
+} else {
+  carta.style.display = "none";
+}
+});
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+  const fechaInput = document.getElementById('fecha');
+  const hoy = new Date();
+  const dia = hoy.getDate();
+  const mes = hoy.getMonth() + 1;
+  const anio = hoy.getFullYear();
+  const fechaActual = anio + '-' + (mes < 10 ? '0' : '') + mes + '-' + (dia < 10 ? '0' : '') + dia;
+  
+  fechaInput.setAttribute('min', fechaActual);
+});
 </script>
-      </script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-    </body>
-    </html>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+    
+</body>
+</html>
 
 <style>
-  body {
-    height: 100vh
-    ;
-    background-image: url(fondo.jpg);
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-  .card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  label {
-    font-size: larger;
-    font-weight: bold;
-
-  }
-
-  #sintomas {
-    height: 50px;
-  }
-#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10{
- color: red; 
+body {
+height: 100vh
+;
+background-image: url(fondo.jpg);
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
 }
-  #zonaArriba {
-    width: 90%;
-    background-color: rgb(0, 0, 0);
-    border: solid 4px;
-    color: whitesmoke;
-  }
+.card-actions {
+display: flex;
+justify-content: space-between;
+margin-top: 10px;
+}
+label {
+font-size: larger;
+font-weight: bold;
 
-  #container {
-    width: 80%;
-    height: 1000%;
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 2%;
-    border: solid 4px;
-  }
+}
 
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    text-align: left;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  }
+#sintomas {
+height: 50px;
+}
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10{
+color: red; 
+}
+#zonaArriba {
+width: 90%;
+background-color: rgb(0, 0, 0);
+border: solid 4px;
+color: whitesmoke;
+}
 
- 
-  #container2 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+#container {
+width: 80%;
+height: 1000%;
+background-color: rgb(255, 255, 255);
+margin-bottom: 2%;
+border: solid 4px;
+}
 
-  .card {
-    margin: 10px;
-    border: solid 3px;
-  }
-  .card-body{
-    font-weight: bold;
+.modal-body {
+display: flex;
+flex-direction: column;
+justify-content: left;
+text-align: left;
+font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
 
-  }
-  
-  h1{
-    font-weight: bold;
-  }
- #compartido{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  border-bottom: solid 4px black;
-  justify-content: center;
- }
- #Estados{
-  width: 12%;
-  font-weight: bold;
-  border: solid 2px black;
-  margin-bottom: 6px;
-  text-align: center;
-  }
-  
-  .contenedorTarjetas{
-    display: flex;
-    flex-direction: row;
-  }
+
+#container2 {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.card {
+margin: 10px;
+border: solid 3px;
+}
+.card-body{
+font-weight: bold;
+
+}
+
+h1{
+font-weight: bold;
+}
+#compartido{
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+border-bottom: solid 4px black;
+justify-content: center;
+}
+#Estados{
+width: 12%;
+font-weight: bold;
+border: solid 2px black;
+margin-bottom: 6px;
+text-align: center;
+}
+
+.contenedorTarjetas{
+display: flex;
+flex-direction: row;
+}
+.añadir{
+background-color: rgb(255 140 3);
+font-weight: bold;
+}
 </style>
