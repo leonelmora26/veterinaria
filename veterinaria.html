@@ -61,7 +61,7 @@
           <label for="">estado</label>
           <select class="form-select" aria-label="Default select example" id="estado">
             <option value="0" disabled selected>Seleccionar el tipo de estado</option>
-            <option value="creado">Creado</option>
+            <option value="Creado">Creado</option>
             <option value="Terminado">Terminado</option>
             <option value="Cancelado">Cancelado</option>          
           </select>
@@ -174,7 +174,7 @@ if (!validarHorarioDisponible()) {
         const tipo = document.getElementById("tipoAnimalSelect").value;
         const sintomas = document.getElementById("sintomas").value;
         const nuevoestado = document.getElementById("estado").value;
-
+console.log(sintomas);
         if (cartaModificar) {
         
           const imagen = cartaModificar.querySelector("img");
@@ -197,10 +197,10 @@ if (!validarHorarioDisponible()) {
     tipoAnimal.textContent =
       "Tipo de animal: " + document.querySelector("#tipoAnimalSelect option:checked").text;
 
-    const sintomasOriginal = cartaModificar.dataset.sintomas;
+    // const sintomasOriginal = cartaModificar.dataset.sintomas;
           
-    const sintomasTexto = cartaModificar.querySelector(".card-text:last-of-type");
-sintomasTexto.textContent = "Síntomas: " + sintomasOriginal;
+    const sintomasTexto = cartaModificar.querySelector(".card-text:nth-of-type(5)");
+sintomasTexto.textContent = "Síntomas: " + sintomas;
 
 
     const estadoTexto = cartaModificar.querySelector(".estado-text");
@@ -290,15 +290,17 @@ limpiarCampos();
 
     function modificarCarta(carta) {
       cartaModificar = carta;
+
+      console.log(carta);
       
       const mascota = carta.querySelector("h5").textContent;
       const propietario = carta.querySelector(".card-text").textContent.split(": ")[1];
       const telefono = carta.querySelector(".card-text:nth-of-type(2)").textContent.split(": ")[1];
       const fechaHora = carta.querySelector(".card-text:nth-of-type(3)").textContent.split(": ")[1];
       const tipo = carta.querySelector(".card-text:nth-of-type(4)").textContent.split(": ")[1];
-      const sintomas = carta.querySelector(".card-text:last-of-type").textContent.split(": ")[1];
+      const sintomas = carta.querySelector(".card-text:nth-of-type(5)").textContent.split(": ")[1];
       const estado = carta.querySelector(".estado-text").textContent.split(": ")[1];
-
+console.log(estado);
 
 
       sintomasOriginal= sintomas;
